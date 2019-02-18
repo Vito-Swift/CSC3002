@@ -25,10 +25,17 @@ std::string getMonthName(int month) {
 }
 
 void p1() {
+    std::cout << "CSC-3002 Assignment 1 [Test Part 1]" << std::endl;
+
     int year;
 
     std::cout << "Enter a year: ";
     std::cin >> year;
+
+    if (year <= 0) {
+        std::cerr << "Input year cannot be a non-positive value. Aborted." << std::endl;
+        exit(1);
+    }
 
     try {
         for (int i = 1; i < 13; i++) {

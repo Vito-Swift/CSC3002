@@ -8,6 +8,6 @@
 
 int main() {
     Assignment1::p1();
-
+    Assignment1::p2();
     return EXIT_SUCCESS;
 }
