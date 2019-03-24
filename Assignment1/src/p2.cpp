@@ -63,15 +63,15 @@ int findDNAMatch(std::string s1, std::string s2, int start) {
     std::string reverseS2 = reverseDNAStrand(&s2);
 
     // split substrings starting from each char of the reversed longer strand with the equal length as the short strand
-    for (int i = start; i <= reverseS2.length() - s1.length(); i++) {
+    for (int i = start; ulong(i) <= reverseS2.length() - s1.length(); i++) {
 
         // boolean to store if ith substring is as same as the shorter strand
         bool isSameString = true;
 
         // comparision between each character
-        for (int j = 0; j < s1.length(); j++) {
+        for (int j = 0; ulong(j) < s1.length(); j++) {
 
-            if (s1[j] != reverseS2[i+j]){
+            if (s1[ulong(j)] != reverseS2[ulong(i+j)]){
                 isSameString = false;
                 break;
             }
@@ -100,7 +100,7 @@ void p2() {
     std::cin >> s2;
 
     // check if s2 is a valid DNA strand
-    while (s2.find_first_not_of( "AGCT" ) != std::string::npos) { // s2 include characters which are not AGCT
+    while (s2.find_first_not_of("AGCT") != std::string::npos) { // s2 include characters which are not AGCT
 
         // print error message
         std::cerr << "Invalid DNA strand." << std::endl;
@@ -118,7 +118,7 @@ void p2() {
     std::cin >> s1;
 
     // check if s1 is a valid DNA strand
-    while (s1.find_first_not_of( "AGCT" ) != std::string::npos) { // s1 include characters which are not AGCT
+    while (s1.find_first_not_of("AGCT") != std::string::npos) { // s1 include characters which are not AGCT
 
         // print error message
         std::cerr << "Invalid DNA strand." << std::endl;

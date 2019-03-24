@@ -23,5 +23,6 @@ int main() {
 
     // call the entry function of part 2
     Assignment1::p2();
+
     return EXIT_SUCCESS;
 }
