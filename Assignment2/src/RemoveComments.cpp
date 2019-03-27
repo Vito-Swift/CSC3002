@@ -34,6 +34,60 @@ int main() {
  */
 
 void removeComments(istream & is, ostream & os) {
-    // TODO
 
+    Vector<std::string> fileLines;
+    readEntireFile(is, fileLines);
+
+    string uncommentedFile;
+    bool inMultiComm;
+    bool inSingleComm;
+
+    inMultiComm = false;
+    inSingleComm = false;
+
+
+    for (const string& line: fileLines) {
+
+        unsigned long n = line.length();
+
+        if (n == 1)
+            uncommentedFile += line;
+
+        else {
+            for (unsigned int i = 0; i < n; i++) {
+
+                if (inMultiComm && line[i] == '*' && line[i+1] == '/') {
+                    inMultiComm = false;
+                    i++;
+                }
+
+                else if (inMultiComm || inSingleComm)
+                    continue;
+
+                else if (line[i] == '/' && line[i+1] == '*') {
+                    inMultiComm = true;
+                    i++;
+                }
+
+                else if (line[i] == '/' && line[i+1] == '/') {
+                    inSingleComm = true;
+                    i++;
+                }
+
+                else
+                    uncommentedFile += line[i];
+             }
+        }
+
+        if (!inMultiComm) {
+            if (inSingleComm)
+                inSingleComm = false;
+            uncommentedFile += '\n';
+        }
+
+    }
+
+    uncommentedFile += '\0';
+    os << uncommentedFile;
+    os.clear();
 }

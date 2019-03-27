@@ -26,12 +26,30 @@ void readCodeFile(string filename, Map<int,string> & map);
 /* Main program */
 
 int main() {
-   Map<int,string> areaCodeToState;
-   readCodeFile("AreaCodes.txt", areaCodeToState);
-   
-   // TODO
-   
-   return 0;
+    Map<int,string> areaCodeToState;
+    readCodeFile("AreaCodes.txt", areaCodeToState);
+
+    while (true) {
+        string line;
+        cout << "Enter area code or state name: ";
+        getline(cin, line);
+        if (line == "") break;
+        if (stringIsInteger(line)) {
+            int code = stringToInteger(line);
+            if (!areaCodeToState.containsKey(code)) error("Cannot find code: " + line);
+            cout << areaCodeToState[code] << endl;
+        } else {
+            bool isValidState = false;
+            areaCodeToState.mapAll([&](int code, string state){
+                if (state == line) {
+                    cout << code << endl;
+                    isValidState = true;
+                }
+            });
+            if (!isValidState) error("Cannot find state: " + line);
+        }
+    }
+    return 0;
 }
 
 /*
@@ -44,7 +62,15 @@ int main() {
  */
 
 void readCodeFile(string filename, Map<int,string> & map) {
-   
    // TODO
-   
+    ifstream infile;
+    infile.open(filename.c_str());
+    if (infile.fail()) error("Can't read the data file");
+    string line;
+    while (getline(infile, line)) {
+        if (line.length() < 4 || line[3] != '-') error("Illegal data line: " + line);
+        int code = stringToInteger(line.substr(0, 3));
+        map.put(code, line.substr(4));
+    }
+    infile.close();
 }
