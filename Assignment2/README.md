@@ -14,6 +14,7 @@ Student ID: 117010285
 - Use Qt Creator to build source file and run compiled executables
 
 ### Build & Run
+
 1. Open Qt Creator
 2. Open `FindAreaCode.pro`, `HFractal.pro`, `IntArray.pro` or `RemoveComments.pro`
 3. Configure under `project-run` and select `run in terminal`
