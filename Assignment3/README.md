@@ -1,4 +1,4 @@
-## CSC3002 Assignment 2
+## CSC3002 Assignment 3
 
 The source code is a submission for CSC3002 Introduction to Computer Science II, Assignment 3.
 
